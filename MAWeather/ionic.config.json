@@ -1,0 +1,7 @@
+{
+  "name": "MAWeather",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
