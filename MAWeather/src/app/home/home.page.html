@@ -1,8 +1,12 @@
 <ion-header [translucent]="true">
 
 
-<ion-content [fullscreen]="true">   
-    
+<ion-content [fullscreen]="true"> 
+    <div style="text-align: center; margin: 10px;">
+        <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">Weather Forecast</ion-label>
+    </div>  
+    <ion-searchbar animated></ion-searchbar>
+
     <ion-card>
         <ion-item lines="none">
             <p>Local Time</p>
@@ -10,11 +14,10 @@
         </ion-item>
 
         <ion-item lines="none">
-            <span>
-                {{(localTemp?.temp - 273.15).toFixed(0)}}
+            <span  id="tempStyle">
+                {{(localTemp?.temp - 273.15).toFixed(0)}}°
             </span>
-            <span>°</span>
-            <img [src]=weatherIcon>
+            <img [src]=weatherIcon slot="end">
         </ion-item>
 
         <ion-item>

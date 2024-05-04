@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Geolocation } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
+
+//https://coolors.co/020202-1f7a8c-fafafa-e3f2fd-db5461
 
 const API_KEY = environment.API_KEY;
 const API_URL = environment.API_URL;
@@ -39,22 +42,26 @@ export class HomePage {
   weatherIcon: any
 
   constructor(public httpClient:HttpClient) {
-    this.pullData()
+    this.getCurrentLocation()
+  }
+  async getCurrentLocation() {
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      this.pullData(coordinates.coords.latitude, coordinates.coords.longitude);
+    } catch (e) {
+      console.error('Error getting location', e);
+    }
   }
 
-  pullData() {
-    this.httpClient.get<WeatherResponse>(`${API_URL}weather?q=${"Dublin,IE"}&appid=${API_KEY}`).subscribe(results => {
-      console.log(results)
+  pullData(latitude: number, longitude: number) {
+    const API_KEY = environment.API_KEY;
+    const API_URL = environment.API_URL;
+    this.httpClient.get<WeatherResponse>(`${API_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`).subscribe(results => {
       this.localTemp = results.main;
       this.weatherDetails = results.weather;
-      this.cityName = results.name
-      this.weatherIcon = `https://openweathermap.org/img/wn/${this.weatherDetails[0].icon}@4x.png`
-      console.log(this.localTemp);
-      console.log(this.weatherDetails);
-      console.log(this.cityName);
-      
-    
-    })
+      this.cityName = results.name;
+      this.weatherIcon = `https://openweathermap.org/img/wn/${this.weatherDetails[0].icon}@4x.png`;
+    });
   }
 
 }

@@ -39,8 +39,11 @@
 ion-content {
     --background: #413C58;
   }
+  ion-card {
+    border-radius: 20px;;
+  }
 
 ion-item {
-    --background: #BFD7B5;
-    color: black;
+    --background: #1F7A8C;
+    color: #FAFAFA;
   }
