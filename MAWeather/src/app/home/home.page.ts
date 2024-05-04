@@ -4,8 +4,6 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
 
-//https://coolors.co/020202-1f7a8c-fafafa-e3f2fd-db5461
-
 const API_KEY = environment.API_KEY;
 const API_URL = environment.API_URL;
 

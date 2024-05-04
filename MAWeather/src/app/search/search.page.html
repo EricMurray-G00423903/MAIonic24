@@ -1,13 +1,63 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>search</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">search</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="no-scroll">
+
+    <div style="text-align: center; margin: 10px;">
+      <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">City Search</ion-label>
+    </div>  
+    <ion-searchbar [(ngModel)]="searchCity" (ionChange)="searchForCity()" animated placeholder="Enter city name"></ion-searchbar>
+
+    <ng-container *ngIf="localTemp"> <!-- Check if localTemp has data -->
+      <ion-card>
+        <ion-item lines="none">
+          <p>Local Time</p>
+          <ion-label slot="end">{{ todaysDate | date: 'EEE, dd MMM, h:mm a' }}</ion-label>
+        </ion-item>
+  
+        <ion-item lines="none">
+          <span id="tempStyle">
+            {{ (localTemp?.temp - 273.15).toFixed(0) }}°
+          </span>
+          <img [src]="weatherIcon" slot="end">
+        </ion-item>
+  
+        <ion-item lines="none">
+          <ion-icon name="location"></ion-icon>
+          <span>{{ cityName }}</span>
+        </ion-item>
+      </ion-card>
+  
+      <ion-card>
+        <ion-item lines="none">
+          <span>Feels Like</span>
+          <span slot="end">{{ (localTemp?.feels_like - 273.15).toFixed(0) }}°</span>
+        </ion-item>
+        <ion-item lines="none">
+          <span>Highs</span>
+          <span slot="end">{{ (localTemp?.temp_max - 273.15).toFixed(0) }}°</span>
+        </ion-item>
+        <ion-item lines="none">
+          <span>Lows</span>
+          <span slot="end">{{ (localTemp?.temp_min - 273.15).toFixed(0) }}°</span>
+        </ion-item>
+      </ion-card>
+    </ng-container>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="chevron-up-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button (click)="navigateToAbout()">
+          <ion-icon name="information-circle"></ion-icon> <!-- About Icon -->
+        </ion-fab-button>
+        <ion-fab-button (click)="navigateToSettings()">
+          <ion-icon name="settings"></ion-icon> <!-- Settings Icon -->
+        </ion-fab-button>
+        <ion-fab-button (click)="navigateToHome()">
+          <ion-icon name="home"></ion-icon> <!-- Home Icon -->
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
 </ion-content>
