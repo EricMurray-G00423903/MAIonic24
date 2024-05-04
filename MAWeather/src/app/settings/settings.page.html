@@ -1,13 +1,36 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="no-scroll">
+  <div style="text-align: center; margin: 10px;">
+    <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">Settings</ion-label>
+  </div>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-toggle [checked]="selectedTheme" (ionChange)="toggleTheme()" [enableOnOffLabels]="true">Switch Themes</ion-toggle>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-toggle [checked]="locationPermission" (ionChange)="toggleLocationPermission()" [enableOnOffLabels]="true">Allow Location</ion-toggle>
+    </ion-item>
+    <div style="text-align: center;">
+      <ion-button color="danger" (click)="clearData()">Clear Data</ion-button>
+    </div>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="navigateToAbout()">
+        <ion-icon name="information-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="navigateToSearch()">
+        <ion-icon name="search"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="navigateToHome()">
+        <ion-icon name="home"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>
