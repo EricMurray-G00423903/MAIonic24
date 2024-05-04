@@ -1,7 +1,7 @@
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Renderer2, Inject, ChangeDetectorRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { DOCUMENT } from '@angular/common';
-import { StorageService } from '../services/storage.service'; // Ensure the path is correct
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -9,39 +9,36 @@ import { StorageService } from '../services/storage.service'; // Ensure the path
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-  selectedTheme!: boolean; // Definite assignment assertion
-  locationPermission!: boolean; // Definite assignment assertion
+  selectedTheme!: boolean; // whether the theme is light/dark on/off
+  locationPermission!: boolean; // if permission is granted on/off
 
+  //use renderer2 and changedetectorref to update the theme and DOM to update the theme when its toggled
   constructor(
     private navCtrl: NavController,
-    private storageService: StorageService, // Inject StorageService
-    private renderer: Renderer2, // Add Renderer2 for DOM manipulation
-    @Inject(DOCUMENT) private document: Document // Inject Document to access DOM
+    private storageService: StorageService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private document: Document,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
 
+  //get the theme from storage
   async ngOnInit() {
-    // Check the current theme and location permission from storage and apply them
     const theme = await this.storageService.get('theme');
-    this.selectedTheme = theme === 'dark'; // True if dark, false if not set or light
+    this.selectedTheme = theme === 'dark';
     this.locationPermission = await this.storageService.get('geolocationPermission') || false;
-    this.applyTheme(); // Apply the theme on initial load
+    this.applyTheme();
   }
 
+  //method to toggle theme and change in storage
   async toggleTheme() {
-    console.log("Current theme before toggle:", this.selectedTheme ? 'dark' : 'light');
-    // Toggle the theme state
     this.selectedTheme = !this.selectedTheme;
-    console.log("New theme after toggle:", this.selectedTheme ? 'dark' : 'light');
-    // Update the theme in storage
     await this.storageService.set('theme', this.selectedTheme ? 'dark' : 'light');
-    // Apply the theme
     this.applyTheme();
-}
+    this.changeDetectorRef.detectChanges();
+  }
 
-
-
+  //use renderer to change the dom
   applyTheme() {
-    // Toggle 'dark' class on the body based on the selectedTheme
     if (this.selectedTheme) {
       this.renderer.addClass(this.document.body, 'dark');
     } else {
@@ -49,19 +46,22 @@ export class SettingsPage implements OnInit {
     }
   }
 
+  //toggle the location permission in storage
   async toggleLocationPermission() {
     this.locationPermission = !this.locationPermission;
     await this.storageService.set('geolocationPermission', this.locationPermission);
   }
 
+  //clear data storage
   async clearData() {
-    console.log('Clearing data...');
     await this.storageService.clear();
-    this.selectedTheme = false; // Reset to default light theme
-    this.locationPermission = false; // Reset to default deny
-    this.applyTheme(); // Reset theme to light after clearing data
+    this.selectedTheme = false;
+    this.locationPermission = false;
+    this.applyTheme();
+    this.changeDetectorRef.detectChanges();
   }
 
+  //nav/routing methods
   navigateToHome() {
     this.navCtrl.navigateRoot('/home');
   }

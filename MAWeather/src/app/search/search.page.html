@@ -4,9 +4,9 @@
 <ion-content [fullscreen]="true" class="no-scroll">
 
     <div style="text-align: center; margin: 10px;">
-      <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">City Search</ion-label>
+      <ion-label class="headingLabel">City Search</ion-label>
     </div>  
-    <ion-searchbar [(ngModel)]="searchCity" (ionChange)="searchForCity()" animated placeholder="Enter city name"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchCity" (ionChange)="searchForCity()" animated placeholder="Enter city name" style="--background: var(--ion-color-primary); --color: var(--ion-color-text); --placeholder-color: var(--ion-color-text); --icon-color: var(--ion-color-text);"></ion-searchbar>
 
     <ng-container *ngIf="localTemp"> <!-- Check if localTemp has data -->
       <ion-card>

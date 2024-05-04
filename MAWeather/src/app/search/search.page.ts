@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { NavController, LoadingController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
+
+//Super similar code to Home.ts
+
 const API_KEY = environment.API_KEY;
 const API_URL = environment.API_URL;
 
@@ -34,7 +37,7 @@ interface WeatherDetail {
 export class SearchPage implements OnInit {
   searchCity: string = '';
   cityName: string = '';
-  localTemp: any;  // Consider defining a more specific type or interface for temperatures.
+  localTemp: any;
   todaysDate: Date = new Date();
   weatherDetails: WeatherDetail[] = [];
   weatherIcon: string = '';
@@ -63,6 +66,7 @@ export class SearchPage implements OnInit {
     }
   }
 
+  //search method call to api to find the city and get the coordinates
   searchForCity() {
     if (!this.searchCity.trim()) return; // Avoid searching for an empty string
     this.presentLoading();
@@ -81,6 +85,7 @@ export class SearchPage implements OnInit {
       });
   }
 
+  //Pull method from before with nav routing methods below
   pullData(latitude: number, longitude: number) {
     this.httpClient.get<WeatherResponse>(`${API_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`)
       .subscribe(results => {

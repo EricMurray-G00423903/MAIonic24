@@ -5,9 +5,12 @@ import { Geolocation } from '@capacitor/geolocation';
 import { environment } from 'src/environments/environment';
 import { StorageService } from '../services/storage.service';
 
+//API URL AND KEYS
 const API_KEY = environment.API_KEY;
 const API_URL = environment.API_URL;
 
+
+//Interface for handling data received from api pull
 interface WeatherResponse {
   main: {
     temp: number;
@@ -35,6 +38,7 @@ interface WeatherDetail {
 })
 export class HomePage {
 
+  //variables
   cityName: any;
   localTemp: any;
   todaysDate = new Date();
@@ -52,6 +56,7 @@ export class HomePage {
     this.initializeSettings();
   }
 
+  //loading screen while permissions are granted and location is loaded and pulled
   async presentLoading() {
     this.loading = await this.loadingController.create({
       message: 'Please wait...',
@@ -95,10 +100,11 @@ export class HomePage {
     }
   }
 
+  //get current location with geolocation plugin
   async getCurrentLocation() {
     try {
       const coordinates = await Geolocation.getCurrentPosition();
-      this.pullData(coordinates.coords.latitude, coordinates.coords.longitude);
+      this.pullData(coordinates.coords.latitude, coordinates.coords.longitude); //call our method to pull data
     } catch (e) {
       console.error('Error getting location', e);
       this.dismissLoading();
@@ -106,12 +112,14 @@ export class HomePage {
     }
   }
 
+  //if cant find anything or permission denied, set default to deublin
   setDefaultLocation() {
     const defaultLat = 53.3498; // Latitude for Dublin
     const defaultLon = -6.2603; // Longitude for Dublin
     this.pullData(defaultLat, defaultLon);
   }
 
+  //pull data call to openweathermap api
   pullData(latitude: number, longitude: number) {
     this.httpClient.get<WeatherResponse>(`${API_URL}/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`).subscribe(
       results => {
@@ -128,6 +136,7 @@ export class HomePage {
     );
   }
 
+  //navigate routing methods
   navigateToSearch() {
     this.navCtrl.navigateForward('/search');
   }

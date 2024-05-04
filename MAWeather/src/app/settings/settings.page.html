@@ -3,12 +3,14 @@
 
 <ion-content [fullscreen]="true" class="no-scroll">
   <div style="text-align: center; margin: 10px;">
-    <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">Settings</ion-label>
+    <ion-label class="headingLabel">Settings</ion-label>
   </div>
   <ion-card>
     <ion-item lines="none">
-      <ion-toggle [(ngModel)]="selectedTheme" (ionChange)="toggleTheme()">Switch Themes</ion-toggle>
+      <ion-label>Switch Theme</ion-label>
+      <ion-button (click)="toggleTheme()" size="default">Toggle</ion-button>
     </ion-item>
+    
     
     <ion-item lines="none">
       <ion-toggle [checked]="locationPermission" (ionChange)="toggleLocationPermission()" [enableOnOffLabels]="true">Allow Location</ion-toggle>
