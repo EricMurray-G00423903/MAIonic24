@@ -40,7 +40,8 @@ ion-content {
     --background: #413C58;
   }
   ion-card {
-    border-radius: 20px;;
+    --background: #1F7A8C;
+    border-radius: 10px;;
   }
 
 ion-item {
@@ -54,6 +55,24 @@ ion-item {
     --color: #FAFAFA;
   }
   
+  .card-header {
+    font-size: 1.2em;
+    color: #FAFAFA; /* or any color that fits your design */
+    font-weight: bold;
+    background-color: #f4f4f4; /* light grey background for header */
+    border-bottom: 1px solid #ccc; /* subtle separation from the content */
+  }
+  
+  .no-scroll {
+    --overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #tempStyle {
+    font-size: 3em;
+  }
 
   @keyframes spin {
     0% { transform: rotate(0deg); }

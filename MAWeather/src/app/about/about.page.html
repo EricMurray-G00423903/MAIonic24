@@ -1,13 +1,48 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>about</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">about</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="no-scroll">
+  <div style="text-align: center; margin: 10px;">
+    <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">About</ion-label>
+</div> 
+
+<ion-card>
+  <ion-item lines="none" class="card-header">
+    What is This App?
+  </ion-item>
+  <ion-item lines="none" style="padding: 5px;">
+    This app provides weather updates locally or via search. Using data from a global weather API.
+  </ion-item>
+</ion-card>
+
+<ion-card>
+  <ion-item lines="none" class="card-header">Features</ion-item>
+  <ion-item lines="none">Current weather conditions</ion-item>
+  <ion-item lines="none">Search City specific weather</ion-item>
+  <ion-item lines="none">Customizable settings</ion-item>
+</ion-card>
+
+<ion-card>
+  <ion-item lines="none" class="card-header">
+    API Integration
+  </ion-item>
+  <ion-item lines="none" style="padding: 5px;">Our app uses the OpenWeatherMap API to fetch weather data.</ion-item>
+</ion-card>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+        <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+        <ion-fab-button (click)="navigateToSettings()">
+            <ion-icon name="settings"></ion-icon> <!-- Settings Icon -->
+        </ion-fab-button>
+        <ion-fab-button (click)="navigateToSearch()">
+            <ion-icon name="search"></ion-icon> <!-- Search Icon -->
+        </ion-fab-button>
+        <ion-fab-button (click)="navigateToHome()">
+            <ion-icon name="home"></ion-icon> <!-- Home Icon -->
+        </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

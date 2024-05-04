@@ -20,22 +20,22 @@
             <img [src]=weatherIcon slot="end">
         </ion-item>
 
-        <ion-item>
+        <ion-item lines="none">
             <ion-icon name="location"></ion-icon>
             <span>{{cityName}}</span>
         </ion-item>
     </ion-card>
 
     <ion-card>
-        <ion-item>
+        <ion-item lines="none">
             <span>Feels Like</span>
             <span slot="end">{{(localTemp?.feels_like - 273.15).toFixed(0)}}°</span>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
             <span>Highs</span>
             <span slot="end">{{(localTemp?.temp_max - 273.15).toFixed(0)}}°</span>
         </ion-item>
-        <ion-item>
+        <ion-item lines="none">
             <span>Lows</span>
             <span slot="end">{{(localTemp?.temp_min - 273.15).toFixed(0)}}°</span>
         </ion-item>
