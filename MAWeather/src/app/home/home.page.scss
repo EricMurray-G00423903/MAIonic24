@@ -26,6 +26,13 @@
   text-decoration: none;
 }
 
+.no-scroll {
+  --overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 #tempStyle {
   font-size: 3em;
 }

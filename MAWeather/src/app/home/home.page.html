@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
 
 
-<ion-content [fullscreen]="true"> 
+<ion-content [fullscreen]="true" class="no-scroll"> 
     <div style="text-align: center; margin: 10px;">
-        <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">Weather Forecast</ion-label>
+        <ion-label style="font-weight: 400; font-size: 1.5em; color: #A3C4BC;">Local Forecast</ion-label>
     </div>  
-    <ion-searchbar animated></ion-searchbar>
+    <!--<ion-searchbar animated></ion-searchbar>-->
 
     <ion-card>
         <ion-item lines="none">
@@ -41,4 +41,22 @@
         </ion-item>
     </ion-card>
     
+
+    <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button>
+            <ion-icon name="chevron-up-circle"></ion-icon>
+        </ion-fab-button>
+            <ion-fab-list side="top">
+                <ion-fab-button (click)="navigateToAbout()">
+                    <ion-icon name="information-circle"></ion-icon> <!-- About Icon -->
+                </ion-fab-button>
+                <ion-fab-button (click)="navigateToSettings()">
+                    <ion-icon name="settings"></ion-icon> <!-- Settings Icon -->
+                </ion-fab-button>
+                <ion-fab-button (click)="navigateToSearch()">
+                    <ion-icon name="search"></ion-icon> <!-- Search Icon -->
+                </ion-fab-button>
+            </ion-fab-list>
+      </ion-fab>
+
 </ion-content>
