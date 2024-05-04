@@ -36,51 +36,67 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
+/* Light theme colors */
+:root {
+  --ion-color-background: #413C58; /* Background color */
+  --ion-color-primary: #1F7A8C;    /* Primary color */
+  --ion-color-text: #FAFAFA;       /* Text color */
+  --ion-color-primary-contrast: #ffffff; /* Contrast color for primary */
+}
+
+/* Dark theme colors */
+body.dark {
+  --ion-color-background: #020202; /* Dark Background color */
+  --ion-color-primary: #DB5461;    /* Dark Primary color */
+  --ion-color-text: #FAFAFA;       /* Dark Text color, which is the same but for clarity */
+  --ion-color-primary-contrast: #ffffff; /* Dark Contrast color for primary */
+}
+
 ion-content {
-    --background: #413C58;
-  }
-  ion-card {
-    --background: #1F7A8C;
-    border-radius: 10px;;
-  }
+    --background: var(--ion-color-background);
+}
+
+ion-card {
+    --background: var(--ion-color-primary);
+    border-radius: 10px;
+}
 
 ion-item {
-    --background: #1F7A8C;
-    color: #FAFAFA;
-  }
+    --background: var(--ion-color-primary);
+    color: var(--ion-color-text);
+}
 
-  ion-fab-button {
-    --background: #1F7A8C;
-    --background-activated: #E3F2FD;
-    --color: #FAFAFA;
-  }
-  
-  .card-header {
+ion-fab-button {
+    --background: var(--ion-color-primary);
+    --background-activated: var(--ion-color-primary-contrast);
+    --color: var(--ion-color-text);
+}
+
+.card-header {
     font-size: 1.2em;
-    color: #FAFAFA; /* or any color that fits your design */
+    color: var(--ion-color-text);
     font-weight: bold;
-    background-color: #f4f4f4; /* light grey background for header */
+    background-color: var(--ion-color-background);
     border-bottom: 1px solid #ccc; /* subtle separation from the content */
-  }
-  
-  .no-scroll {
+}
+
+.no-scroll {
     --overflow: hidden;
     height: 100vh;
     display: flex;
     flex-direction: column;
-  }
-  
-  #tempStyle {
-    font-size: 3em;
-  }
+}
 
-  @keyframes spin {
+#tempStyle {
+    font-size: 3em;
+}
+
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
-  
-  .loading-logo {
+}
+
+.loading-logo {
     height: 50px;
     animation: spin 2s linear infinite;
-  }
-  
+}

@@ -7,8 +7,9 @@
   </div>
   <ion-card>
     <ion-item lines="none">
-      <ion-toggle [checked]="selectedTheme" (ionChange)="toggleTheme()" [enableOnOffLabels]="true">Switch Themes</ion-toggle>
+      <ion-toggle [(ngModel)]="selectedTheme" (ionChange)="toggleTheme()">Switch Themes</ion-toggle>
     </ion-item>
+    
     <ion-item lines="none">
       <ion-toggle [checked]="locationPermission" (ionChange)="toggleLocationPermission()" [enableOnOffLabels]="true">Allow Location</ion-toggle>
     </ion-item>
